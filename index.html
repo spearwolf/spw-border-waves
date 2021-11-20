@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,shrink-to-fit=no"
+    />
+    <title>spw-border-waves web component demo • created by spearwolf</title>
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        overflow: hidden;
+        position: fixed;
+        overscroll-behavior-y: none;
+        background: #666;
+        background: linear-gradient(174deg, #608ac0 0%, #fff7c8);
+        display: flex;
+        flex-direction: column;
+      }
+      .particleCurves {
+        box-sizing: border-box;
+        flex-grow: 1;
+      }
+      .pageFooter {
+        border-top: 1px solid #666;
+        padding: 0.1em 0 0.25em;
+        color: #aaa;
+        background-color: #2e2d2b;
+        text-align: center;
+        z-index: 2;
+      }
+    </style>
+  </head>
+  <body>
+    <spw-border-waves
+      src="assets/demo-helix-1.json"
+      class="particleCurves"
+    ></spw-border-waves>
+
+    <script type="module" src="spw-border-waves.js"></script>
+
+    <footer class="pageFooter"><code>&lt;spw-border-waves&gt;</code></footer>
+  </body>
+</html>
