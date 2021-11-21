@@ -1,6 +1,6 @@
 import { css, html, LitElement } from "lit";
-import { BorderWavesDemo } from "../demo/BorderWavesDemo";
-import createThreeDisplay from "./createThreeDisplay";
+import { Display } from "@spearwolf/three-display";
+import { BorderWavesApp } from "../app/BorderWavesApp";
 
 const $color = Symbol("color");
 
@@ -29,14 +29,17 @@ export class BorderWavesElement extends LitElement {
     `;
   }
 
-  [$color] = undefined;
+  constructor() {
+    super();
+    this.borderWaves = new BorderWavesApp();
+  }
 
   get color() {
-    return this[$color];
+    return this.borderWaves.getColor();
   }
 
   set color(color) {
-    this[$color] = src;
+    this.borderWaves.setColor(color);
   }
 
   render() {
@@ -56,13 +59,16 @@ export class BorderWavesElement extends LitElement {
   firstUpdated() {
     super.firstUpdated();
 
-    this.borderWaves = new BorderWavesDemo();
-
-    this.threeDisplay = createThreeDisplay(
-      this,
+    this.threeDisplay = new Display(
       this.renderRoot.querySelector(".canvasContainer"),
-      this.borderWaves
+      {
+        resizeTo: () => this.getContentBoxSize(),
+        preserveDrawingBuffer: true,
+      }
     );
+
+    this.threeDisplay.on(this.borderWaves);
+    this.threeDisplay.start();
   }
 
   getContentBoxSize() {

@@ -18,12 +18,11 @@
         overflow: hidden;
         position: fixed;
         overscroll-behavior-y: none;
-        background: #666;
-        background: linear-gradient(174deg, #608ac0 0%, #fff7c8);
+        background: #f0f0f0;
         display: flex;
         flex-direction: column;
       }
-      .particleCurves {
+      .borderWaves {
         box-sizing: border-box;
         flex-grow: 1;
       }
@@ -38,10 +37,7 @@
     </style>
   </head>
   <body>
-    <spw-border-waves
-      src="assets/demo-helix-1.json"
-      class="particleCurves"
-    ></spw-border-waves>
+    <spw-border-waves color="#aaaaaa" class="borderWaves"></spw-border-waves>
 
     <script type="module" src="spw-border-waves.js"></script>
 
