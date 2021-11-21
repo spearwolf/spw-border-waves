@@ -19,28 +19,37 @@
         position: fixed;
         overscroll-behavior-y: none;
         background: #f0f0f0;
-        display: flex;
-        flex-direction: column;
+        background: url("purple-env-background.png");
+        background-size: cover;
+        background-position: center top;
+      }
+      .pageHeader {
+        position: relative;
+        background-color: #141b30;
+        padding: 1em 2em;
+      }
+      .title {
+        color: #f0f0f0;
+        font-size: 21px;
       }
       .borderWaves {
-        box-sizing: border-box;
-        flex-grow: 1;
-      }
-      .pageFooter {
-        border-top: 1px solid #666;
-        padding: 0.1em 0 0.25em;
-        color: #aaa;
-        background-color: #2e2d2b;
-        text-align: center;
-        z-index: 2;
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 60px;
       }
     </style>
   </head>
   <body>
-    <spw-border-waves color="#aaaaaa" class="borderWaves"></spw-border-waves>
+    <header class="pageHeader">
+      <div class="title">
+        Border waves as web component demo.
+      </div>
+      <spw-border-waves color="#141b30" class="borderWaves"></spw-border-waves>
+    </header>
 
     <script type="module" src="spw-border-waves.js"></script>
-
-    <footer class="pageFooter"><code>&lt;spw-border-waves&gt;</code></footer>
   </body>
 </html>

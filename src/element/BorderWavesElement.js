@@ -2,8 +2,6 @@ import { css, html, LitElement } from "lit";
 import { Display } from "@spearwolf/three-display";
 import { BorderWavesApp } from "../app/BorderWavesApp";
 
-const $color = Symbol("color");
-
 export class BorderWavesElement extends LitElement {
   static properties = {
     color: { type: String },
@@ -15,8 +13,6 @@ export class BorderWavesElement extends LitElement {
         display: inline-block;
         position: relative;
         overflow: hidden;
-        min-width: 320px;
-        min-height: 200px;
       }
 
       .canvasContainer {
