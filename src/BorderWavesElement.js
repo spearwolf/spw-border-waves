@@ -1,6 +1,6 @@
 import { css, html, LitElement } from "lit";
 import { Display } from "@spearwolf/three-display";
-import { BorderWavesApp } from "../app/BorderWavesApp";
+import { BorderWavesApp } from "./BorderWavesApp";
 
 export class BorderWavesElement extends LitElement {
   static properties = {

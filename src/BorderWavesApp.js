@@ -10,9 +10,9 @@ import {
   Vector2,
   Vector4,
 } from "three";
-import { defineSignals } from "../utils/defineSignals";
-import dpr from "../utils/dpr";
-import { debug } from "../utils/log";
+import { defineSignals } from "./defineSignals";
+import dpr from "./dpr";
+import { debug } from "./log";
 
 const vertexShader = `precision highp float;
 attribute vec2 position;
@@ -43,7 +43,7 @@ void main() {
   gl_FragColor = vec4(uColor.rgb, 1.0);
 }`;
 
-function createTriangle() {
+function createFullscreenTriangle() {
   const geometry = new BufferGeometry();
   const vertices = new Float32Array([-1.0, -1.0, 3.0, -1.0, -1.0, 3.0]);
   geometry.setAttribute("position", new BufferAttribute(vertices, 2));
@@ -56,7 +56,7 @@ function createTriangle() {
       uResolution: { value: new Vector2(1, 1) },
       uDevicePixelRatio: { value: dpr() },
       uTime: { value: 0.0 },
-      uWaveFrequency: { value: new Vector2(2, 1920) }, // for each 1920px we want to have 2x waves
+      uWaveFrequency: { value: new Vector2(1.2, 1000) }, // for each 1000px we want to have 1.2x waves
     },
   });
 
@@ -71,9 +71,12 @@ export class BorderWavesApp {
     this.scene = new Scene();
     this.camera = new OrthographicCamera();
 
-    this.triangle = createTriangle();
+    this.triangle = createFullscreenTriangle();
     this.scene.add(this.triangle);
 
+    // TODO
+    // - read color from css properties
+    // - add signals/properties for wave-frequency and wave-speed
     defineSignals(this, "Color");
 
     createEffect(() => {
@@ -100,6 +103,7 @@ export class BorderWavesApp {
   }
 
   frame({ renderer, now }) {
+    // TODO add pause-offset to now/delta-time.. (switch browser tabs issue)
     this.triangle.material.uniforms.uTime.value = now * 0.5;
 
     renderer.render(this.scene, this.camera);

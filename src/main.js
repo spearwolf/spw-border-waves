@@ -1,1 +1,1 @@
-import "./element/BorderWavesElement";
+import "./BorderWavesElement";
