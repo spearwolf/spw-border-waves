@@ -75,8 +75,8 @@ export class BorderWavesApp {
     this.scene.add(this.triangle);
 
     // TODO
-    // - read color from css properties
-    // - add signals/properties for wave-frequency and wave-speed
+    // - read color from (custom) css properties
+    // - add signals/properties for wave-frequency and wave-speed, align-border{top|bottom|..}
     defineSignals(this, "Color");
 
     createEffect(() => {
@@ -103,7 +103,9 @@ export class BorderWavesApp {
   }
 
   frame({ renderer, now }) {
-    // TODO add pause-offset to now/delta-time.. (switch browser tabs issue)
+    // TODO
+    // - add pause-offset to now/delta-time.. (switch browser tabs issue)
+    // - random seed (time?)
     this.triangle.material.uniforms.uTime.value = now * 0.5;
 
     renderer.render(this.scene, this.camera);
