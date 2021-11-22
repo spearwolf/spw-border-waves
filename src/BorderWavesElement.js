@@ -5,6 +5,7 @@ import { BorderWavesApp } from "./BorderWavesApp";
 export class BorderWavesElement extends LitElement {
   static properties = {
     color: { type: String },
+    alignBorder: { type: String },
   };
 
   static get styles() {
@@ -13,6 +14,8 @@ export class BorderWavesElement extends LitElement {
         display: inline-block;
         position: relative;
         overflow: hidden;
+        pointer-events: none;
+        user-select: none;
       }
 
       .canvasContainer {
@@ -36,6 +39,14 @@ export class BorderWavesElement extends LitElement {
 
   set color(color) {
     this.borderWaves.setColor(color);
+  }
+
+  get alignBorder() {
+    return this.borderWaves.getAlignBorder() ?? "top";
+  }
+
+  set alignBorder(alignBorder) {
+    this.borderWaves.setAlignBorder(alignBorder);
   }
 
   render() {

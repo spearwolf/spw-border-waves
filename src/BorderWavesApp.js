@@ -27,19 +27,29 @@ uniform vec2 uResolution;
 uniform float uDevicePixelRatio;
 uniform float uTime;
 uniform vec2 uWaveFrequency;
+uniform float uAlignBorder;
 
 #define PI 3.14159265359
 #define HALF_PI 1.570796326794896
 
 void main() {
   vec2 uv = gl_FragCoord.xy / uResolution / uDevicePixelRatio;
+
   float waveFrequency = PI * uWaveFrequency.x * 2.0 * uResolution.x / uWaveFrequency.y;
   float wave0 = 0.5 + sin(uTime + uv.x * cos(-uTime / 13.0) * waveFrequency + HALF_PI) / 2.0;
   float wave1 = 0.5 + sin(cos(uv.x) * sin(uTime / 10.0) * waveFrequency + HALF_PI * sin(uTime / 3.0)) / 2.0;
+
   float wave = (wave0 + wave1) / 2.0;
-  if (wave > uv.y) {
-    discard;
+  if (uAlignBorder == 0.0) {
+    if (wave > uv.y) {
+      discard;
+    }
+  } else {
+    if (wave < uv.y) {
+      discard;
+    }
   }
+
   gl_FragColor = vec4(uColor.rgb, 1.0);
 }`;
 
@@ -56,6 +66,7 @@ function createFullscreenTriangle() {
       uResolution: { value: new Vector2(1, 1) },
       uDevicePixelRatio: { value: dpr() },
       uTime: { value: 0.0 },
+      uAlignBorder: { value: 0 },
       uWaveFrequency: { value: new Vector2(1.2, 1000) }, // for each 1000px we want to have 1.2x waves
     },
   });
@@ -77,7 +88,7 @@ export class BorderWavesApp {
     // TODO
     // - read color from (custom) css properties
     // - add signals/properties for wave-frequency and wave-speed, align-border{top|bottom|..}
-    defineSignals(this, "Color");
+    defineSignals(this, "Color", "AlignBorder");
 
     createEffect(() => {
       const col = new Color(this.getColor());
@@ -87,6 +98,12 @@ export class BorderWavesApp {
         col.b,
         1.0
       );
+    });
+
+    createEffect(() => {
+      const alignBorder = this.getAlignBorder();
+      this.triangle.material.uniforms.uAlignBorder.value =
+        alignBorder === "bottom" ? 1 : 0;
     });
   }
 
