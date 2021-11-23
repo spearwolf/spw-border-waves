@@ -44,3 +44,4 @@ $ npm run start
 - [ ] npm package output, for _no-install-usage_ by using e.g. https://skypack.dev
 - [ ] cheat-sheet documentation
   - [ ] add to README
+- [ ] check/verify cleanup on dispose, disconnect ..
