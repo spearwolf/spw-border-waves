@@ -31,8 +31,6 @@ $ npm run start
 - [ ] set initial seed (random-as-default? time?)
 - [ ] read from custom styles/css properties
   - [ ] color
-  - [ ] wave-frequency
-  - [ ] wave-speed
   - [ ] align-border {top|bottom}
 - [x] add signals/properties for
   - [x] wave-frequency
