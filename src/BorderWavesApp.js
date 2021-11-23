@@ -67,7 +67,7 @@ function createFullscreenTriangle() {
       uDevicePixelRatio: { value: dpr() },
       uTime: { value: 0.0 },
       uAlignBorder: { value: 0 },
-      uWaveFrequency: { value: new Vector2(1.2, 1000) }, // for each 1000px we want to have 1.2x waves
+      uWaveFrequency: { value: new Vector2(1, 1000) }, // for each 1000px we want to have 1x wave(s)
     },
   });
 
@@ -85,10 +85,11 @@ export class BorderWavesApp {
     this.triangle = createFullscreenTriangle();
     this.scene.add(this.triangle);
 
-    // TODO
-    // - read color from (custom) css properties
-    // - add signals/properties for wave-frequency and wave-speed, align-border{top|bottom|..}
-    defineSignals(this, "Color", "AlignBorder");
+    this.waveSpeed = 1.0;
+
+    defineSignals(this, "Color", "AlignBorder", ["WaveFrequency", 1.2]);
+
+    // TODO read color from (custom) css properties
 
     createEffect(() => {
       const col = new Color(this.getColor());
@@ -104,6 +105,14 @@ export class BorderWavesApp {
       const alignBorder = this.getAlignBorder();
       this.triangle.material.uniforms.uAlignBorder.value =
         alignBorder === "bottom" ? 1 : 0;
+    });
+
+    createEffect(() => {
+      const waveFrequency = this.getWaveFrequency();
+      this.triangle.material.uniforms.uWaveFrequency.value = new Vector2(
+        waveFrequency,
+        1000
+      );
     });
   }
 
@@ -123,7 +132,7 @@ export class BorderWavesApp {
     // TODO
     // - add pause-offset to now/delta-time.. (switch browser tabs issue)
     // - random seed (time?)
-    this.triangle.material.uniforms.uTime.value = now * 0.5;
+    this.triangle.material.uniforms.uTime.value = now * this.waveSpeed;
 
     renderer.render(this.scene, this.camera);
   }

@@ -30,9 +30,9 @@ $ npm run start
 - [ ] add pause-offset to now/delta-time.. (switch browser tab and come back _issue_)
 - [ ] set initial seed (random-as-default? time?)
 - [ ] read color from (custom) css properties
-- [ ] add signals/properties for
-  - [ ] wave-frequency
-  - [ ] wave-speed
+- [x] add signals/properties for
+  - [x] wave-frequency
+  - [x] wave-speed
   - [x] align-border {top|bottom}
 - [ ] remove/deactivate-by-default console debug logs
 - [ ] add console ascii art banner :wink:
