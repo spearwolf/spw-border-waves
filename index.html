@@ -7,7 +7,21 @@
       content="width=device-width,initial-scale=1,shrink-to-fit=no"
     />
     <title>waves as web component • demo • created by spearwolf</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit&family=Ribeye&display=swap"
+      rel="stylesheet"
+    />
     <style>
+      :root {
+        --fgCol: #44484a;
+        --headBgCol: #f8f8f8;
+        --secondaryBgCol: #272930;
+        --footerBgCol: #1e1f24;
+        --footerFgCol: #c2cdee;
+      }
+
       html,
       body {
         width: 100%;
@@ -15,71 +29,220 @@
       }
       body {
         margin: 0;
-        overflow: hidden;
-        position: fixed;
-        overscroll-behavior-y: none;
-        background: #fff;
-        background: url("purple-env-background.png");
+        overflow-x: hidden;
+        background: rgb(128, 157, 200);
+        background: linear-gradient(
+          174deg,
+          rgba(128, 157, 200, 1) 0%,
+          rgba(245, 243, 232, 1) 77%,
+          rgba(254, 193, 255, 1) 100%
+        );
+        background-position: center;
         background-size: cover;
-        background-position: center top;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        font-family: "Outfit", sans-serif;
       }
+      p {
+        margin: 0;
+        padding: 0 0 1em;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Ribeye", cursive;
+        margin: 0;
+      }
+
       .pageHeader {
         position: relative;
-        background-color: #f5f5f5; /*#141b30;*/
+        background-color: var(--headBgCol);
         padding: 1em 2em;
         min-height: 80px;
       }
+
       .titleContainer {
         display: inline-block;
-        background-color: #222429;
-        border-bottom-right-radius: 16px;
-        padding: .5em 1em;
+        padding: 0.5em 0;
         position: relative;
-      }
-      .titleContainer::before {
-        content: '';
-        display: block;
-        position: absolute;
-        height: 5px;
-        top: 0;
-        left: 95%;
-        right: -50%;
-        background-color: #222429;
-      }
-      .titleContainer::after {
-        content: '';
-        display: block;
-        position: absolute;
-        width: 5px;
-        top: 95%;
-        left: 0;
-        bottom: -50%;
-        background-color: #222429;
+        overflow-x: hidden;
       }
       .title {
-        color: #f0f0f0;
-        text-shadow: 0 0 15px #ccf, 0 0 20px #0f8;
-        font-size: 27px;
-        font-family: 'Source Sans Pro', monospace;
+        color: var(--fgCol);
+        font-size: 64px;
       }
+      @media only screen and (max-width: 500px) {
+        .pageHeader {
+          padding: 1em 0;
+        }
+        .title {
+          font-size: 42px;
+        }
+      }
+
       .borderWaves {
         display: block;
         position: absolute;
-        top: 100%;
         left: 0;
         width: 100%;
         height: 60px;
-        z-index: -1;
+      }
+      .borderWavesAfter {
+        top: 100%;
+      }
+      .borderWavesBefore {
+        top: -60px;
+      }
+      .borderWavesFooter {
+        top: -90px;
+        height: 90px;
+      }
+
+      .contentLayout {
+        max-width: 720px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      @media only screen and (max-width: 780px) {
+        .contentLayout {
+          max-width: calc(100vw - 80px);
+        }
+      }
+      @media only screen and (min-width: 781px) {
+        .contentLayout {
+          max-width: 720px;
+        }
+      }
+
+      .mainContent {
+        color: var(--fgCol);
+      }
+      .primaryContent {
+        margin-top: 80px;
+        padding-bottom: 100px;
+      }
+      .secondaryContent {
+        position: relative;
+        color: var(--footerFgCol);
+        background-color: var(--secondaryBgCol);
+        padding-top: 60px;
+        padding-bottom: 120px;
+      }
+
+      .loremIpsum {
+        font-size: 24px;
+        text-align: justify;
+      }
+
+      .pageFooter {
+        background-color: var(--secondaryBgCol);
+      }
+      .pageFooter > .contentLayout {
+        position: relative;
+      }
+      .footerContent {
+        min-height: 200px;
+        padding-top: 4em;
+        background-color: var(--footerBgCol);
+        color: var(--footerFgCol);
+        text-align: center;
+        padding-bottom: 0;
+      }
+      @media only screen and (max-width: 768px) {
+        .footerContent {
+          max-width: none;
+        }
       }
     </style>
   </head>
   <body>
     <header class="pageHeader">
-      <div class="titleContainer">
-        <div class="title">Waves as web component. demo.</div>
+      <div class="contentLayout">
+        <article class="titleContainer">
+          <h1 class="title">Waves as web component. demo.</h1>
+        </article>
       </div>
-      <spw-border-waves color="#f5f5f5" class="borderWaves"></spw-border-waves>
+
+      <spw-border-waves
+        color="#f8f8f8"
+        class="borderWaves borderWavesAfter"
+      ></spw-border-waves>
     </header>
+
+    <main class="mainContent primaryContent contentLayout">
+      <p class="loremIpsum">
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+        eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+        voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+      </p>
+      <p class="loremIpsum">
+        Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
+        sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+        diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+        erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et
+        ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+        ipsum dolor sit amet.
+      </p>
+      <p class="loremIpsum">
+        Dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+        tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+        voluptua.
+      </p>
+      <p class="loremIpsum">
+        Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
+        aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+        dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
+        est Lorem ipsum dolor sit amet.
+      </p>
+      <p class="loremIpsum">
+        Sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+        dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
+        justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+        takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
+        amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+        invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+      </p>
+      <p class="loremIpsum">
+        At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
+        gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+      </p>
+    </main>
+
+    <section class="mainContent secondaryContent">
+      <div class="contentLayout">
+        <spw-border-waves
+          color="#272930"
+          align-border="bottom"
+          wave-speed="0.2"
+          class="borderWaves borderWavesBefore"
+        ></spw-border-waves>
+
+        <p class="loremIpsum">
+          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+          nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+          rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+          ipsum dolor sit amet.
+        </p>
+      </div>
+    </section>
+
+    <footer class="pageFooter">
+      <div class="footerContent contentLayout">
+        <spw-border-waves
+          color="#1e1f24"
+          align-border="bottom"
+          wave-frequency="2.3"
+          class="borderWaves borderWavesFooter"
+        ></spw-border-waves>
+
+        Lorem ipsum dolor sit amet.
+      </div>
+    </footer>
 
     <script type="module" src="spw-border-waves.js"></script>
   </body>

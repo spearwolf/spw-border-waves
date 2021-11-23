@@ -43,3 +43,4 @@ $ npm run start
 - [ ] cheat-sheet documentation
   - [ ] add to README
 - [ ] check/verify cleanup on dispose, disconnect ..
+- [ ] do not render if element is outside of viewport
