@@ -5,9 +5,9 @@ import { BorderWavesApp } from "./BorderWavesApp";
 export class BorderWavesElement extends LitElement {
   static properties = {
     color: { type: String },
-    alignBorder: { type: String },
-    waveSpeed: { type: Number },
-    waveFrequency: { type: Number },
+    alignBorder: { type: String, attribute: "align-border" },
+    waveSpeed: { type: Number, attribute: "wave-speed" },
+    waveFrequency: { type: Number, attribute: "wave-frequency" },
   };
 
   static get styles() {
@@ -56,7 +56,7 @@ export class BorderWavesElement extends LitElement {
   }
 
   set waveSpeed(waveSpeed) {
-    this.borderWaves.waveSpeed = parseFloat(waveSpeed);
+    this.borderWaves.waveSpeed = waveSpeed;
   }
 
   get waveFrequency() {
@@ -64,7 +64,7 @@ export class BorderWavesElement extends LitElement {
   }
 
   set waveFrequency(waveFrequency) {
-    this.borderWaves.setWaveFrequency(parseFloat(waveFrequency));
+    this.borderWaves.setWaveFrequency(waveFrequency);
   }
 
   render() {
