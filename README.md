@@ -23,7 +23,6 @@ $ copy build/spw-border-waves.js $TO_YOUR_PUBLIC_STATIC_ASSETS_DIRECTORY
 $ npm run start
 ```
 
-
 ## TODO
 
 ### Roadmap v1.0
@@ -37,6 +36,6 @@ $ npm run start
   - [x] align-border {top|bottom}
 - [ ] remove/deactivate-by-default console debug logs
 - [ ] add console ascii art banner :wink:
-- [ ] npm package output, for easy use by using e.g. https://skypack.dev
+- [ ] npm package output, for _no-install-usage_ by using e.g. https://skypack.dev
 - [ ] cheat-sheet documentation
   - [ ] add to README
