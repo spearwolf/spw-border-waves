@@ -1,5 +1,4 @@
-# spw-border-waves
-
+# Waves as Web Component
 ## Usage
 
 1. Build
