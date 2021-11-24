@@ -2,6 +2,34 @@ import { css, html, LitElement } from "lit";
 import { Display } from "@spearwolf/three-display";
 import { BorderWavesApp } from "./BorderWavesApp";
 
+const CustomProperties = {
+  Keys: ["color", "alignBorder"],
+  Style: {
+    color: "--border-waves-color",
+    alignBorder: "--border-waves-align-border",
+  },
+  Setter: {
+    color: "setColor",
+    alignBorder: "setAlignBorder",
+  },
+};
+
+const readStyleValue = (value, callbackFn) => {
+  if (value != null) {
+    if (typeof value === "string") {
+      value = value.trim();
+      if (value === "") {
+        return false;
+      }
+    }
+    if (callbackFn) {
+      callbackFn(value);
+    }
+    return true;
+  }
+  return false;
+};
+
 export class BorderWavesElement extends LitElement {
   static properties = {
     color: { type: String },
@@ -40,7 +68,7 @@ export class BorderWavesElement extends LitElement {
   }
 
   set color(color) {
-    this.borderWaves.setColor(color);
+    this.#setProperty("color", color);
   }
 
   get alignBorder() {
@@ -48,7 +76,7 @@ export class BorderWavesElement extends LitElement {
   }
 
   set alignBorder(alignBorder) {
-    this.borderWaves.setAlignBorder(alignBorder);
+    this.#setProperty("alignBorder", alignBorder);
   }
 
   get waveSpeed() {
@@ -73,11 +101,14 @@ export class BorderWavesElement extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
+    // TODO restart?
     console.debug("[connectedCallback]", this);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
+    this.threeDisplay?.stop();
+    // TODO Display.dispose()
     console.debug("[disconnectedCallback]", this);
   }
 
@@ -87,34 +118,79 @@ export class BorderWavesElement extends LitElement {
     this.threeDisplay = new Display(
       this.renderRoot.querySelector(".canvasContainer"),
       {
-        resizeTo: () => this.getContentBoxSize(),
+        resizeTo: () => this.getContentBoxSize(this.#getComputedStyle(true)),
         preserveDrawingBuffer: true,
       }
     );
 
+    this.threeDisplay.on("frame", () => {
+      const style = this.#getComputedStyle();
+      this.#updateCustomPropertiesStyle(style);
+    });
+
     this.threeDisplay.on(this.borderWaves);
+
     this.threeDisplay.start();
   }
 
-  getContentBoxSize() {
+  getContentBoxSize(style) {
     const { width, height } = this.getBoundingClientRect();
 
-    const styles = getComputedStyle(this, null);
     const verticalMargin =
-      parseInt(styles.getPropertyValue("border-top-width") || "0", 10) +
-      parseInt(styles.getPropertyValue("border-bottom-width") || "0", 10) +
-      parseInt(styles.getPropertyValue("padding-top") || "0", 10) +
-      parseInt(styles.getPropertyValue("padding-bottom") || "0", 10);
+      parseInt(style.getPropertyValue("border-top-width") || "0", 10) +
+      parseInt(style.getPropertyValue("border-bottom-width") || "0", 10) +
+      parseInt(style.getPropertyValue("padding-top") || "0", 10) +
+      parseInt(style.getPropertyValue("padding-bottom") || "0", 10);
     const horizontalMargin =
-      parseInt(styles.getPropertyValue("border-right-width") || "0", 10) +
-      parseInt(styles.getPropertyValue("border-left-width") || "0", 10) +
-      parseInt(styles.getPropertyValue("padding-left") || "0", 10) +
-      parseInt(styles.getPropertyValue("padding-right") || "0", 10);
+      parseInt(style.getPropertyValue("border-right-width") || "0", 10) +
+      parseInt(style.getPropertyValue("border-left-width") || "0", 10) +
+      parseInt(style.getPropertyValue("padding-left") || "0", 10) +
+      parseInt(style.getPropertyValue("padding-right") || "0", 10);
 
     return [
       Math.floor(width - horizontalMargin),
       Math.floor(height - verticalMargin),
     ];
+  }
+
+  #lastComputedStyle = undefined;
+
+  #getComputedStyle = (update = false) => {
+    if (update || this.#lastComputedStyle == null) {
+      this.#lastComputedStyle = getComputedStyle(this, null);
+    }
+    return this.#lastComputedStyle;
+  };
+
+  #setPropertyValue = (propKey, value) => {
+    this.borderWaves[CustomProperties.Setter[propKey]](value);
+  };
+
+  #propertiesWithPrecedence = new Set();
+
+  #setProperty = (propKey, propValue) => {
+    if (
+      !readStyleValue(propValue, (value) => {
+        this.#setPropertyValue(propKey, value);
+        this.#propertiesWithPrecedence.add(propKey);
+      })
+    ) {
+      this.#propertiesWithPrecedence.delete(propKey);
+    }
+  };
+
+  #updateCustomPropertiesStyle(style) {
+    for (const propKey of CustomProperties.Keys) {
+      const hasPrecedenceValue = this.#propertiesWithPrecedence.has(propKey);
+      if (!hasPrecedenceValue) {
+        readStyleValue(
+          style.getPropertyValue(CustomProperties.Style[propKey]),
+          (value) => {
+            this.#setPropertyValue(propKey, value);
+          }
+        );
+      }
+    }
   }
 }
 

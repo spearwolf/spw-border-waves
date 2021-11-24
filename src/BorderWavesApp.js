@@ -89,8 +89,6 @@ export class BorderWavesApp {
 
     defineSignals(this, "Color", "AlignBorder", ["WaveFrequency", 1.2]);
 
-    // TODO read color from (custom) css properties
-
     createEffect(() => {
       const col = new Color(this.getColor());
       this.triangle.material.uniforms.uColor.value = new Vector4(

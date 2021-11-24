@@ -101,6 +101,18 @@
         height: 90px;
       }
 
+      .pageHeader > .borderWaves {
+        --border-waves-color: var(--headBgCol);
+      }
+      .secondaryContent .borderWaves {
+        --border-waves-color: var(--secondaryBgCol);
+        --border-waves-align-border: bottom;
+      }
+      .pageFooter .borderWaves {
+        --border-waves-color: var(--footerBgCol);
+        --border-waves-align-border: bottom;
+      }
+
       .contentLayout {
         max-width: 720px;
         margin-left: auto;
@@ -167,10 +179,7 @@
         </article>
       </div>
 
-      <spw-border-waves
-        color="#f8f8f8"
-        class="borderWaves borderWavesAfter"
-      ></spw-border-waves>
+      <spw-border-waves class="borderWaves borderWavesAfter"></spw-border-waves>
     </header>
 
     <main class="mainContent primaryContent contentLayout">
@@ -215,8 +224,6 @@
     <section class="mainContent secondaryContent">
       <div class="contentLayout">
         <spw-border-waves
-          color="#272930"
-          align-border="bottom"
           wave-speed="0.2"
           class="borderWaves borderWavesBefore"
         ></spw-border-waves>
@@ -234,8 +241,6 @@
     <footer class="pageFooter">
       <div class="footerContent contentLayout">
         <spw-border-waves
-          color="#1e1f24"
-          align-border="bottom"
           wave-frequency="2.3"
           class="borderWaves borderWavesFooter"
         ></spw-border-waves>

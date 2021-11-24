@@ -17,21 +17,21 @@ $ copy build/spw-border-waves.js $TO_YOUR_PUBLIC_STATIC_ASSETS_DIRECTORY
 <spw-border-waves color="#666"></spw-border-waves>
 ```
 
+
 ## Development
 
 ```sh
 $ npm run start
 ```
 
-## TODO
 
 ### Roadmap v1.0
 
 - [ ] add pause-offset to now/delta-time.. (switch browser tab and come back _issue_)
 - [ ] set initial seed (random-as-default? time?)
-- [ ] read from custom styles/css properties
-  - [ ] color
-  - [ ] align-border {top|bottom}
+- [x] read from custom styles/css properties
+  - [x] color
+  - [x] align-border {top|bottom}
 - [x] add signals/properties for
   - [x] wave-frequency
   - [x] wave-speed
@@ -44,3 +44,13 @@ $ npm run start
   - [ ] add to README
 - [ ] check/verify cleanup on dispose, disconnect ..
 - [ ] do not render if element is outside of viewport
+
+
+## Support
+
+Need help? Please [open an issue](https://github.com/spearwolf/spw-border-waves/issues/new) for support.
+
+
+## License
+
+This project is licensed under MIT.
