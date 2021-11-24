@@ -12,7 +12,6 @@ import {
 } from "three";
 import { defineSignals } from "./defineSignals";
 import dpr from "./dpr";
-import { debug } from "./log";
 
 const vertexShader = `precision highp float;
 attribute vec2 position;
@@ -112,12 +111,6 @@ export class BorderWavesApp {
         1000
       );
     });
-  }
-
-  async init({ display }) {
-    this.display = display;
-
-    debug("BorderWavesApp.init", this);
   }
 
   resize({ width, height }) {
