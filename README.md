@@ -39,6 +39,7 @@ $ npm run start
 - [ ] add console ascii art banner :wink:
   - [ ] add check and warning when script is loaded multiple times
 - [ ] npm package output, for _no-install-usage_ by using e.g. https://skypack.dev
+  - [ ] add custom-elements.json to npm pkg
 - [ ] cheat-sheet documentation
   - [ ] add to README
 - [ ] check/verify cleanup on dispose, disconnect ..

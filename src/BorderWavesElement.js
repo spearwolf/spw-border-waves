@@ -1,5 +1,5 @@
 import { css, html, LitElement } from "lit";
-import { Display } from "@spearwolf/three-display";
+import { Display, getContentAreaSize } from "@spearwolf/three-display";
 import { BorderWavesApp } from "./BorderWavesApp";
 
 const CustomProperties = {
@@ -44,8 +44,6 @@ export class BorderWavesElement extends LitElement {
         display: inline-block;
         position: relative;
         overflow: hidden;
-        pointer-events: none;
-        user-select: none;
       }
 
       .canvasContainer {
@@ -118,7 +116,13 @@ export class BorderWavesElement extends LitElement {
     this.threeDisplay = new Display(
       this.renderRoot.querySelector(".canvasContainer"),
       {
-        resizeTo: () => this.getContentBoxSize(this.#getComputedStyle(true)),
+        resizeTo: () => {
+          const { width, height } = getContentAreaSize(
+            this,
+            this.#getComputedStyle(true)
+          );
+          return [width, height];
+        },
         preserveDrawingBuffer: true,
       }
     );
@@ -131,26 +135,6 @@ export class BorderWavesElement extends LitElement {
     this.threeDisplay.on(this.borderWaves);
 
     this.threeDisplay.start();
-  }
-
-  getContentBoxSize(style) {
-    const { width, height } = this.getBoundingClientRect();
-
-    const verticalMargin =
-      parseInt(style.getPropertyValue("border-top-width") || "0", 10) +
-      parseInt(style.getPropertyValue("border-bottom-width") || "0", 10) +
-      parseInt(style.getPropertyValue("padding-top") || "0", 10) +
-      parseInt(style.getPropertyValue("padding-bottom") || "0", 10);
-    const horizontalMargin =
-      parseInt(style.getPropertyValue("border-right-width") || "0", 10) +
-      parseInt(style.getPropertyValue("border-left-width") || "0", 10) +
-      parseInt(style.getPropertyValue("padding-left") || "0", 10) +
-      parseInt(style.getPropertyValue("padding-right") || "0", 10);
-
-    return [
-      Math.floor(width - horizontalMargin),
-      Math.floor(height - verticalMargin),
-    ];
   }
 
   #lastComputedStyle = undefined;
