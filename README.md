@@ -26,7 +26,7 @@ $ npm run start
 
 ### Roadmap v1.0
 
-- [ ] add pause-offset to now/delta-time.. (switch browser tab and come back _issue_)
+- [x] add pause-offset to now/delta-time.. (switch browser tab and come back _issue_)
 - [ ] set initial seed (random-as-default? time?)
 - [x] read from custom styles/css properties
   - [x] color

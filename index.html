@@ -91,11 +91,25 @@
         width: 100%;
         height: 60px;
       }
+      .borderWaves.borderWaves--2ndRow {
+        height: 90px;
+        opacity: .5;
+      }
+      .borderWaves.borderWaves--3rdRow {
+        height: 120px;
+        opacity: .25;
+      }
       .borderWavesAfter {
         top: 100%;
       }
       .borderWavesBefore {
         top: -60px;
+      }
+      .borderWavesBefore.borderWaves--2ndRow {
+        top: -90px;
+      }
+      .borderWavesBefore.borderWaves--3rdRow {
+        top: -120px;
       }
       .borderWavesFooter {
         top: -90px;
@@ -226,6 +240,14 @@
         <spw-border-waves
           wave-speed="0.2"
           class="borderWaves borderWavesBefore"
+        ></spw-border-waves>
+        <spw-border-waves
+          wave-speed="0.21"
+          class="borderWaves borderWavesBefore borderWaves--2ndRow"
+        ></spw-border-waves>
+        <spw-border-waves
+          wave-speed="0.23"
+          class="borderWaves borderWavesBefore borderWaves--3rdRow"
         ></spw-border-waves>
 
         <p class="loremIpsum">
