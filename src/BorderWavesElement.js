@@ -36,6 +36,7 @@ export class BorderWavesElement extends LitElement {
     alignBorder: { type: String, attribute: "align-border" },
     waveSpeed: { type: Number, attribute: "wave-speed" },
     waveFrequency: { type: Number, attribute: "wave-frequency" },
+    initialSeed: { type: Number, attribute: "initial-seed" },
   };
 
   static get styles() {
@@ -91,6 +92,14 @@ export class BorderWavesElement extends LitElement {
 
   set waveFrequency(waveFrequency) {
     this.borderWaves.setWaveFrequency(waveFrequency);
+  }
+
+  get initialSeed() {
+    return this.borderWaves.initialSeed;
+  }
+
+  set initialSeed(initialSeed) {
+    this.borderWaves.initialSeed = initialSeed;
   }
 
   render() {

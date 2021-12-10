@@ -85,6 +85,7 @@ export class BorderWavesApp {
     this.scene.add(this.triangle);
 
     this.waveSpeed = 1.0;
+    this.initialSeed = Math.random() * 1000;
 
     defineSignals(this, "Color", "AlignBorder", ["WaveFrequency", 1.2]);
 
@@ -123,7 +124,8 @@ export class BorderWavesApp {
     // TODO
     // - add pause-offset to now/delta-time.. (switch browser tabs issue)
     // - random seed (time?)
-    this.triangle.material.uniforms.uTime.value = now * this.waveSpeed;
+    this.triangle.material.uniforms.uTime.value =
+      (now + this.initialSeed) * this.waveSpeed;
 
     renderer.render(this.scene, this.camera);
   }
