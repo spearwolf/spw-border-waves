@@ -24,9 +24,9 @@
   },
   "homepage": "https://github.com/spearwolf/spw-border-waves#readme",
   "aliasDependencies": {
-    "@spearwolf/three-display": "./libs/three-display.js",
-    "@spearwolf/three-stages": "./libs/three-stages.js",
-    "@spearwolf/three-vertex-objects": "./libs/three-vertex-objects.js"
+    "@spearwolf/display3": "./libs/display3.js",
+    "@spearwolf/stage25": "./libs/stage25.js",
+    "@spearwolf/vertex-objects": "./libs/vertex-objects.js"
   },
   "devDependencies": {
     "chalk": "^4.1.2",
@@ -43,7 +43,7 @@
     "@spearwolf/eventize": "^2.0.0-beta.2",
     "@spearwolf/signalize": "^0.3.0",
     "glslify": "^7.1.1",
-    "lit": "^2.0.2",
-    "three": "^0.134.0"
+    "lit": "^2.2.2",
+    "three": "^0.139.2"
   }
 }

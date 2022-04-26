@@ -1,5 +1,5 @@
 import { css, html, LitElement } from "lit";
-import { Display, getContentAreaSize } from "@spearwolf/three-display";
+import { Display, getContentAreaSize } from "@spearwolf/display3";
 import { BorderWavesApp } from "./BorderWavesApp";
 
 const CustomProperties = {
